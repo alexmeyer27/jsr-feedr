@@ -1,5 +1,53 @@
-var getAllSources = require('./apicall.js')
 
+
+var ajaxCall = function(){
+	$.ajax({
+  		method: "GET",
+  		crossDomain: true,
+  		url: 'https://newsapi.org/v2/top-headlines',
+  		data: {
+   	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
+   	 		category: 'general',
+ 	 		country: 'us',
+  			language: 'en'
+ 	 	},
+  		success: function(result) {
+  			var articleObjectCreator = function (source, author, title, description, url, urlToImage, publishedAt) {
+				this.source = source;
+				this.author = author;
+				this.title = title;
+				this.description = description;
+				this.url = url;
+				this.urlToImage = urlToImage;
+				this.publishedAt = publishedAt;
+			}
+  			var i = 0;
+  			var ajaxResult = result;
+ 			//go into array and make new object with each article
+			for (i = 0; i < ajaxResult.articles.length; i++){
+				var articles = ajaxResult.articles;
+				var article = new articleObjectCreator(articles[i].source, articles[i].author, articles[i].title, articles[i].description, articles[i].url, articles[i].urlToImage, articles[i].publishedAt)
+				$(".featuredImage").attr("src", "article.urlToImage");
+				console.log(article);
+				return article;
+			};
+  			console.log(ajaxResult);
+ 	 	},
+  		error: function() {
+  			alert("Error - api call unsuccessful. Check console");
+  		}
+	})};
+
+(function () {
+    ajaxCall();
+    var appendToPage = function(){
+    	
+	}
+})();
+
+$( window ).on( "load", function() { 
+
+})
 
 
 /*
