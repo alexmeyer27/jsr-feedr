@@ -31,7 +31,7 @@ var ajaxCall = function(){
 				var articles = ajaxResult.articles;
 				var article = new articleObjectCreator(articles[i].source, articles[i].author, articles[i].title, articles[i].description, articles[i].url, articles[i].urlToImage, articles[i].publishedAt)
 				//append each article to a component
-				createComponent();
+				createComponent(article);
 				appendToPage();
 				console.log(article);
 				// return article;
@@ -60,9 +60,8 @@ $("#defaultFeed").click(function(){
 	}
 );
 
-var createComponent = function () {
+var createComponent = function (article) {
 	//Each article must provide an image source for the circular thumbnail at the left of the article.
-	//Must provide a point, ranking, or some type of total impressions for the respective article.
 	//Must provide either a category, tag, or custom taxonomy to display below the title (of course title of article is also required).
 	//Must provide either a full version or a summary of the article for the pop up screen.
 	//When the user selects an article's title show the `#popUp` overlay. The content of the article must be inserted in the `.container` class inside `#popUp`. Make sure you remove the `.loader` class when toggling the article information in the pop-up.
@@ -75,7 +74,10 @@ var appendToPage = function () {
 
 
 //Add functionality to hide the pop-up when user selects the "X" button on the pop-up.
-	//When the app is first loading and when the user selects to load a new feed from the dropdown, display the `#popUp` container with the `.loader` class. You can toggle the `.hidden` class from the container to display/hide the overlay container.
+$("#popUp .closePopUp").click(function(){
+	$( "#popUp" ).toggleClass( "hidden", true )
+});
+//When the app is first loading and when the user selects to load a new feed from the dropdown, display the `#popUp` container with the `.loader` class. You can toggle the `.hidden` class from the container to display/hide the overlay container.
 
 
 
