@@ -79,6 +79,7 @@ var ajaxCall = function(){
 })();
 
 
+//When the user selects an article's title show the `#popUp` overlay. The content of the article must be inserted in the `.container` class inside `#popUp`. Make sure you remove the `.loader` class when toggling the article information in the pop-up.
 
 // $("h3").each(function(){
 // 	$("h3").click(function(){
@@ -105,39 +106,19 @@ $("#popUp .closePopUp").click(function(){
 });
 
 //When the user clicks/taps the search icon, expand the input box. Best approach for this is to toggle the `.active` class for the `#search` container. If the search input box is already expanded tapping the search icon again will close the input. Pressing the "Enter" key should also close the opened input box. _See Stretch Goal 2 for search filtering functionality.
-$("#search").click(function(){
-	$("#search").toggleClass("active", true)
-});
+var searchBar = document.getElementById("search");
+var searchImage = document.getElementById("searchImage");
 
-if ($("#search").is(".active")) {
-	$("#searchImage").click(function(){
-		$("#search").css("");
-	})
-}
-
-// if ($("#search").hasClass('active')){
-// 		$(document).click(function(){
-// 			$("#search").removeClass("active");
-// 		})
-// 		$("#popUp").click(function(){
-// 			$("#search").removeClass("active");
-// 		})
-// 		$(document).keypress(function(e) {
-//     		if(e.which == 13) {
-//         		$("#search").removeClass("active");
-//     }
-// })} else {}; 
-
-//When the user selects an article's title show the `#popUp` overlay. The content of the article must be inserted in the `.container` class inside `#popUp`. Make sure you remove the `.loader` class when toggling the article information in the pop-up.
-
+searchImage.addEventListener('click', function(){
+	if (searchBar.classList.contains("active")){
+		searchBar.classList.remove("active")
+	} else {
+		searchBar.classList.add("active")
+	};
+})
 
 //politico api call
 $("#politico").click(function(){
-	// event.preventDefault()
- 	$("#main").each(function() {
-    	$("#main").html("");
-    })
-	$('#main').html("");
 	//jQuery ajax call
 	$.ajax({
   		method: "GET",
@@ -191,9 +172,6 @@ $("#politico").click(function(){
 
 //washiongton post api call
 $("#washingtonPost").click(function(){
-	event.preventDefault();
-	$('#main').empty();
-	//jQuery ajax call
 	$.ajax({
   		method: "GET",
   		crossDomain: true,
@@ -246,9 +224,6 @@ $("#washingtonPost").click(function(){
 
 //new york times api call
 $("#newYorkTimes").click(function(){
-	event.preventDefault();
-	var previousArticles = document.querySelectorAll("article");
-	previousArticles.innerHTML = '';
 	//jQuery ajax call
 	$.ajax({
   		method: "GET",
