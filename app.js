@@ -1,5 +1,16 @@
 //Default page here
 
+//On load it should make the intial api call
+
+
+let	source,
+	author,
+	title,
+	description,
+	url,
+	urlToImage,
+	publishedAt;
+
 //main API logic
 var ajaxCall = function(){
 	//jQuery ajax call
@@ -46,17 +57,6 @@ var ajaxCall = function(){
 				// Must provide either a category, tag, or custom taxonomy to display below the title (of course title of article is also required).
 				$("#category").html("<h6>General</h6>");
 				
-				// var popUpCreator = document.getElementsByClassName("popUpCreator");
-
-				// var revealPopUp = function(){
-				// 	popUp.removeClass();
-				// 	$(".container").removeClass("hidden")
-				// 	$("#description").html("<p>" + description + "</p>")
-
-				// 	}
-
-				// popUpCreator.addEventListener("click", revealPopUp);
-				
 				}
 			i++
  			console.log(ajaxResult);
@@ -67,15 +67,34 @@ var ajaxCall = function(){
  		}
 	})};
 
+document.onload = ajaxCall();
+
+let titles = document.querySelectorAll("h3");
+
+// if (document.getElementById("protector").contains("h3")) 
+$(document).ajaxSuccess(function(){
+	titles.addEventListener("click", function(){
+		document.getElementById("popUp").classList.remove();
+	})
+})
+
+
+// var popUpCreator = document.getElementsByClassName("popUpCreator");
+
+				// var revealPopUp = function(){
+				// 	popUp.removeClass();
+				// 	$(".container").removeClass("hidden")
+				// 	$("#description").html("<p>" + description + "</p>")
+
+				// 	}
+
+				// popUpCreator.addEventListener("click", revealPopUp);
 
 
 
 (function () {
 	//When the application first loads display the loading container (see below on instructions to toggle this). When you successfully retrieve information from the default API hide the loader and replace the content of the `#main` container with that of the API. The DOM structure of each article must adhere to the `.article` structure.
 	$( "#popUp" ).toggleClass( "hidden", false );
-   
-   //On load it should make the intial api call
-   ajaxCall();
 })();
 
 
