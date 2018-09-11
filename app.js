@@ -7,6 +7,8 @@ let	source,
 	urlToImage,
 	publishedAt;
 
+//defining pop up requirements employing hidden html with each articles title, description and url
+//When the user selects an article's title show the `#popUp` overlay. The content of the article must be inserted in the `.container` class inside `#popUp`. Make sure you remove the `.loader` class when toggling the article information in the pop-up.
 var popUpCreator = function(){
 			event.preventDefault()
 			$( "#popUp" ).removeClass()
@@ -24,7 +26,7 @@ var popUpCreator = function(){
 	}				
 
 
-//On load it should make the intial api call
+
 
 //main API logic
 var generalHeadlineCall = function(){
@@ -34,8 +36,8 @@ var generalHeadlineCall = function(){
 		crossDomain: true,
 		url: 'https://newsapi.org/v2/top-headlines',
 		data: {
- 	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
- 	 		category: 'general',
+	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
+	 		category: 'general',
 	 		country: 'us',
 			language: 'en'
 	 	},
@@ -68,8 +70,10 @@ var generalHeadlineCall = function(){
 				$("#hiddenTitle").html(title);
 				console.log(title);
 
+				//creating hidden description for popup
 				$("#hiddenDescription").html(description);
 
+				//creating hidden url for popup
 				$("#hiddenURL").html(url);
 				
 				//changing image to match article image
@@ -89,19 +93,12 @@ var generalHeadlineCall = function(){
 		}
 	})};
 
-
+//On load it should make the intial api call
 (function () {
 	//When the application first loads display the loading container (see below on instructions to toggle this). When you successfully retrieve information from the default API hide the loader and replace the content of the `#main` container with that of the API. The DOM structure of each article must adhere to the `.article` structure.
 	$( "#popUp" ).toggleClass( "hidden", false )
 	generalHeadlineCall();
 })();
-
-
-//When the user selects an article's title show the `#popUp` overlay. The content of the article must be inserted in the `.container` class inside `#popUp`. Make sure you remove the `.loader` class when toggling the article information in the pop-up.
-
-
-// document.onload = popUpCreator();
-
 
 //Clicking/tapping the "Feedr" logo will display the main/default feed.
 $("#defaultFeed").click(function(){
@@ -143,15 +140,16 @@ $("#politico").click(function(){
 
 	//jQuery ajax call
 	$.ajax({
- 		method: "GET",
- 		crossDomain: true,
- 		url: 'https://newsapi.org/v2/top-headlines',
- 		data: {
-  	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
-  	 		sources: 'politico',
- 			language: 'en'
+		method: "GET",
+		crossDomain: true,
+		url: 'https://newsapi.org/v2/top-headlines',
+		data: {
+ 	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
+ 	 		sources: 'politico',
+			language: 'en'
 	 	},
-//most of the logic lives within the success function
+	
+	//most of the logic lives within the success function
 		success: function(result) {
 			var i;
 			var ajaxResult = result;
@@ -204,13 +202,13 @@ $("#politico").click(function(){
 //washiongton post api call
 $("#washingtonPost").click(function(){
 	$.ajax({
- 		method: "GET",
- 		crossDomain: true,
- 		url: 'https://newsapi.org/v2/top-headlines',
- 		data: {
-  	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
-  	 		sources: 'the-washington-post',
- 			language: 'en'
+		method: "GET",
+		crossDomain: true,
+		url: 'https://newsapi.org/v2/top-headlines',
+		data: {
+ 	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
+ 	 		sources: 'the-washington-post',
+			language: 'en'
 	 	},
 	 	//most of the logic lives within the success function
 		success: function(result) {
@@ -267,16 +265,16 @@ $("#washingtonPost").click(function(){
 $("#newYorkTimes").click(function(){
 	//jQuery ajax call
 	$.ajax({
- 		method: "GET",
- 		crossDomain: true,
- 		url: 'https://newsapi.org/v2/top-headlines',
- 		data: {
-  	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
-  	 		sources: 'the-new-york-times',
- 			language: 'en'
+		method: "GET",
+		crossDomain: true,
+		url: 'https://newsapi.org/v2/top-headlines',
+		data: {
+ 	 		apiKey: '8535df6ab9464e74a2a8838bd8adec45',
+ 	 		sources: 'the-new-york-times',
+			language: 'en'
 	 	},
 	 	//most of the logic lives within the success function
- 		//most of the logic lives within the success function
+		//most of the logic lives within the success function
 		success: function(result) {
 			var i;
 			var ajaxResult = result;
